@@ -75,8 +75,8 @@ public class AVLibrary {
             if(f.isDirectory() && f.exists()){
                 removeDir(f);
             }
-            removeVideo(f.getPath());
-            removeAudio(f.getPath());
+            removeVideo(f.getPath(), videoMap.get(f.getPath()));
+            removeAudio(f.getPath(), audioMap.get(f.getPath()));
         }
         if(dirList.contains(directory)) {
             dirList.remove(directory);
@@ -112,9 +112,10 @@ public class AVLibrary {
      * @postcondition: removes audio file from audioMap
      * @param audioFile
      */
-    public void removeAudio(String audioFile){
-        audioMap.remove(audioFile);
-        audioTotal--;
+    public void removeAudio(String audioFile, HashMap<String,Object> hash){
+        if(audioMap.remove(audioFile, hash)) {
+            audioTotal--;
+        }
     }
 
     /**
@@ -122,9 +123,10 @@ public class AVLibrary {
      * @postcondition: removes video from videoMap
      * @param video
      */
-    public void removeVideo(String video){
-        videoMap.remove(video);
-        videoTotal--;
+    public void removeVideo(String video, HashMap<String,Object> hash){
+        if(videoMap.remove(video, hash)) {
+            videoTotal--;
+        }
     }
 
 
