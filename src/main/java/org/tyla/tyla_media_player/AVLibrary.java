@@ -14,9 +14,9 @@ public class AVLibrary {
     private int dirTotal; // used to track number of directories in the list
     private int songTotal; // used to track number of songs in the hashmap
     private int videoTotal; // used to track number of videos in the hashmap
-    private String[] fileExtensions = {".mp3", ".wav", ".flac", ".ogg", ".opus", ".aac", ".aiff",
+    private String[] audioFileExtensions = {".mp3", ".wav", ".flac", ".ogg", ".opus", ".aac", ".aiff",
             ".pcm", ".wma", ".m4a",".alac", ".ape", ".au"};
-
+    private String[] videoFileExtensions = {".mp4", ".mov", ".mkv"};
     public AVLibrary(){
         dirList = new ArrayList<>();
         songMap = new HashMap<String, String[]>();
@@ -29,6 +29,10 @@ public class AVLibrary {
 
     public int getSongTotal() {
         return songTotal;
+    }
+
+    public int getVideoTotal() {
+        return videoTotal;
     }
 
     public int getDirTotal(){
@@ -45,25 +49,53 @@ public class AVLibrary {
     public void addDir(File newDir){
         if(newDir.exists() && newDir.isDirectory()){
             for(File f : dirList){
-                if(!newDir.getPath().equals(f.getPath())){
+                if(!newDir.getPath().equals(f.getPath())){ //2026-02-19 TC: need to verify .equals method verifies that the file paths are identical
                     dirList.add(newDir);
                     dirTotal++;
                     addSongs(newDir);
                     addVideos(newDir);
                 }
             }
-
+            if(dirTotal == 0){
+                dirList.add(newDir);
+                dirTotal++;
+                addSongs(newDir);
+                addVideos(newDir);
+            }
         }
     }
 
+    /**
+     * @precondition: requires that the directory input is not null
+     * @postcondition: removes all the files in the directory from the audio and video hashMaps and then removes the directory from the directory list
+     * @param directory
+     */
     public void removeDir(File directory){
+        for(File f : directory.listFiles()){    //2026-02-19 TC: need to check how to handle if the directory.listfiles() is null
+            if(f.isDirectory() && f.exists()){
+                removeDir(f);
+            }
+            removeVideo(f.getPath());
+            removeSong(f.getPath());
+        }
         dirList.remove(directory);
+        dirTotal--;
     }
 
+    /**
+     * @precondition: none
+     * @postcondition: Clears all directories from the directory list and all their media files from their respective songMap or videoMap
+     */
     public void clearDirList(){
-        dirList.clear();
+        for(File f : dirList){
+            removeDir(f);
+        }
     }
 
+    /**
+     * @precondition: dirList must not be empty
+     * @postcondition: scans all audio and video files and places them in their respective songMap or videoMap
+     */
     public void rescanDirs(){
         for(File f : dirList){
             if(f.exists() && f.isDirectory()){
@@ -73,12 +105,31 @@ public class AVLibrary {
         }
     }
 
+    /**
+     * @precondition: none
+     * @postcondition: removes song from songMap
+     * @param song
+     */
+    public void removeSong(String song){
+        songMap.remove(song);
+        songTotal--;
+    }
+
+    /**
+     * @precondition: none
+     * @postcondition: removes video from videoMap
+     * @param video
+     */
+    public void removeVideo(String video){
+        videoMap.remove(video);
+        videoTotal--;
+    }
 
 
 
     /**
      * @return a string listing all directories in dirList.
-     * @precondition:
+     * @precondition: dirList should not be empty
      * @postcondition:
      */
     public String getDirList() {
@@ -95,16 +146,16 @@ public class AVLibrary {
 
 
     /**
-     * @precondition:
-     * @postcondition: adds all music file extensions within a directory to String array songList
+     * @precondition: directory should not be empty
+     * @postcondition: adds all audio files within a directory to songMap
      */
     private void addSongs(File directory){
         String[] metaData = new String[5];
-        for(File f : directory.listFiles()){
+        for(File f : directory.listFiles()){    //2026-02-19 TC: need to check how to handle if the directory.listfiles() is null
             if (f.isDirectory() && f.exists()){
                 addSongs(f);
             }
-            for (String fileExtension : fileExtensions) {
+            for (String fileExtension : audioFileExtensions) {
                 if (f.getName().endsWith(fileExtension)) {
                     //metaData = media.getArray(); // update with whatever luc names the class and methods
                     songMap.put(f.getPath(), metaData);
@@ -115,13 +166,17 @@ public class AVLibrary {
         }
     }
 
+    /**
+     * @precondition: directory should not be empty
+     * @postcondition: adds all video files within a directory to videoMap
+     */
     private void addVideos(File directory){
         String[] metaData = new String [5];
-        for(File f : directory.listFiles()){
+        for(File f : directory.listFiles()){    //2026-02-19 TC: need to check how to handle if the directory.listfiles() is null
             if (f.isDirectory() && f.exists()){
                 addVideos(f);
             }
-            for (String fileExtension : fileExtensions) {
+            for (String fileExtension : videoFileExtensions) {
                 if (f.getName().endsWith(fileExtension)) {
                     //metaData = media.getArray(); // update with whatever luc names the class and methods
                     videoMap.put(f.getPath(), metaData);
@@ -129,8 +184,6 @@ public class AVLibrary {
                     break;
                 }
             }
-
-
         }
     }
 
@@ -142,10 +195,21 @@ public class AVLibrary {
         return songs;
     }
 
+    public String getVideoPath(){
+        String videos = "";
+        for(String f : videoMap.keySet()){
+            videos += f;
+        }
+        return videos;
+    }
+
     public HashMap<String, String[]> getSongMap() {
         return songMap;
     }
 
+    public HashMap<String, String[]> getVideoMap(){
+        return videoMap;
+    }
 
 
 

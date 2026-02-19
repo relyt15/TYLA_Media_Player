@@ -11,6 +11,9 @@ public class AVLibraryDemo {
         lib1.addDir(file);
         System.out.println(lib1.getAudioPath());
 
+        lib1.clearDirList();
+        System.out.println(lib1.getAudioPath());
+
 
 
     }
