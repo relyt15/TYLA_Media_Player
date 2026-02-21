@@ -1,4 +1,4 @@
-package LucsCoolStuff;
+package org.tyla.tyla_media_player;
 
 import java.util.ArrayList;
 import java.util.HashMap;

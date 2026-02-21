@@ -10,7 +10,7 @@ public class AVLibrary {
     private HashMap<String, MetaPull> videoMap; // stores video files with their respective metadata
     private int dirTotal; // used to track number of directories in the list
     private int audioTotal; // used to track number of audio files in the hashmap
-    private MetaPull = metaMap; // used to hold a hashmap<string, object> that holds metadata for media items
+    //private MetaPull = metaMap; // used to hold a hashmap<string, object> that holds metadata for media items
     private int videoTotal; // used to track number of videos in the hashmap
     private String[] audioFileExtensions = {".mp3", ".wav", ".flac", ".ogg", ".opus", ".aac", ".aiff",
             ".pcm", ".wma", ".m4a",".alac", ".ape", ".au"};
@@ -23,7 +23,7 @@ public class AVLibrary {
         dirTotal = 0;
         audioTotal = 0;
         videoTotal = 0;
-        metaMap = new MetaPull();
+       // metaMap = new MetaPull();
 
     } // end of constructor
 
@@ -75,8 +75,8 @@ public class AVLibrary {
             if(f.isDirectory() && f.exists()){
                 removeDir(f);
             }
-            removeVideo(f.getPath(), videoMap.get(f.getPath()));
-            removeAudio(f.getPath(), audioMap.get(f.getPath()));
+           // removeVideo(f.getPath(), videoMap.get(f.getPath()));
+            //removeAudio(f.getPath(), audioMap.get(f.getPath()));
         }
         if(dirList.contains(directory)) {
             dirList.remove(directory);
@@ -161,8 +161,8 @@ public class AVLibrary {
             }
             for (String fileExtension : audioFileExtensions) {
                 if (f.getName().endsWith(fileExtension)) {
-                    metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
-                    audioMap.put(f.getPath(), metaMap);
+                    //metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
+                   // audioMap.put(f.getPath(), metaMap);
                     audioTotal++;
                     break;
                 }
@@ -182,8 +182,8 @@ public class AVLibrary {
             }
             for (String fileExtension : videoFileExtensions) {
                 if (f.getName().endsWith(fileExtension)) {
-                    metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
-                    videoMap.put(f.getPath(), metaMap);
+                    //metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
+                    //videoMap.put(f.getPath(), metaMap);
                     videoTotal++;
                     break;
                 }
@@ -207,13 +207,13 @@ public class AVLibrary {
         return videos;
     }
 
-    public HashMap<String,HashMap<String,Object>> getAudioMap() {
-        return audioMap;
-    }
-
-    public HashMap<String, HashMap<String,Object>> getVideoMap(){
-        return videoMap;
-    }
+//    public HashMap<String,HashMap<String,Object>> getAudioMap() {
+//        return audioMap;
+//    }
+//
+//    public HashMap<String, HashMap<String,Object>> getVideoMap(){
+//        return videoMap;
+//    }
 
 
 
