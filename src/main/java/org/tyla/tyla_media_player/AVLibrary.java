@@ -2,28 +2,28 @@ package org.tyla.tyla_media_player;
 
 import java.io.File;
 import java.util.ArrayList;
-//import javafx.scene.media.Media;
 import java.util.HashMap;
-import java.util.Set;
 
 public class AVLibrary {
     private ArrayList<File> dirList;
-    private HashMap<String, HashMap<String,Object>> audioMap; // stores audio files with their respective metadata
-    private HashMap<String, HashMap<String,Object>> videoMap; // stores video files with their respective metadata
-    //private Media media;
+    private HashMap<String, MetaPull> audioMap; // stores audio files with their respective metadata
+    private HashMap<String, MetaPull> videoMap; // stores video files with their respective metadata
     private int dirTotal; // used to track number of directories in the list
     private int audioTotal; // used to track number of audio files in the hashmap
+    private MetaPull = metaMap; // used to hold a hashmap<string, object> that holds metadata for media items
     private int videoTotal; // used to track number of videos in the hashmap
     private String[] audioFileExtensions = {".mp3", ".wav", ".flac", ".ogg", ".opus", ".aac", ".aiff",
             ".pcm", ".wma", ".m4a",".alac", ".ape", ".au"};
     private String[] videoFileExtensions = {".mp4", ".mov", ".mkv"};
+
     public AVLibrary(){
         dirList = new ArrayList<>();
-        audioMap = new HashMap<String, HashMap<String,Object>>();
-        videoMap = new HashMap<String, HashMap<String,Object>>();
+        audioMap = new HashMap<String, MetaPull>();
+        videoMap = new HashMap<String, MetaPull>();
         dirTotal = 0;
         audioTotal = 0;
         videoTotal = 0;
+        metaMap = new MetaPull();
 
     } // end of constructor
 
@@ -154,15 +154,15 @@ public class AVLibrary {
      * @postcondition: adds all audio files within a directory to audioMap
      */
     private void addAudio(File directory){
-        HashMap<String,Object> metaData = new HashMap<String,Object>();
+        //HashMap<String,Object> metaData = new HashMap<String,Object>();
         for(File f : directory.listFiles()){    //2026-02-19 TC: need to check how to handle if the directory.listfiles() is null
             if (f.isDirectory() && f.exists()){
                 addAudio(f);
             }
             for (String fileExtension : audioFileExtensions) {
                 if (f.getName().endsWith(fileExtension)) {
-                    //metaData = media.getArray(); // update with whatever luc names the class and methods
-                    audioMap.put(f.getPath(), metaData);
+                    metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
+                    audioMap.put(f.getPath(), metaMap);
                     audioTotal++;
                     break;
                 }
@@ -175,15 +175,15 @@ public class AVLibrary {
      * @postcondition: adds all video files within a directory to videoMap
      */
     private void addVideos(File directory){
-        HashMap<String,Object> metaData = new HashMap<String,Object>();
+        //HashMap<String,Object> metaData = new HashMap<String,Object>();
         for(File f : directory.listFiles()){    //2026-02-19 TC: need to check how to handle if the directory.listfiles() is null
             if (f.isDirectory() && f.exists()){
                 addVideos(f);
             }
             for (String fileExtension : videoFileExtensions) {
                 if (f.getName().endsWith(fileExtension)) {
-                    //metaData = media.getArray(); // update with whatever luc names the class and methods
-                    videoMap.put(f.getPath(), metaData);
+                    metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
+                    videoMap.put(f.getPath(), metaMap);
                     videoTotal++;
                     break;
                 }
