@@ -1,41 +1,62 @@
 package org.tyla.tyla_media_player;
 
+import org.jaudiotagger.audio.AudioFile;
+import org.jaudiotagger.audio.AudioFileIO;
+import org.jaudiotagger.audio.AudioHeader;
+import org.jaudiotagger.tag.FieldKey;
+import org.jaudiotagger.tag.Tag;
+
 import java.io.File;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.CountDownLatch;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 public class MetaPull {
 
-    //internet told me that making a mao would be cleaner for the project.
-    public static Map<String, Object> MetadataPull(String path) throws InterruptedException {
+    /**
+     * @param filePath the absolute path of the media file
+     * @return a HashMap containing metadata fields as keys and their values as Objects
+     * @precondition: filePath must point to a valid, readable media file
+     * @postcondition: returns a populated metadata map, or an empty map if the file could not be read
+     */
+    public static HashMap<String, String> MetadataPull(String filePath) {
+        HashMap<String, String> metadata = new HashMap<>();
 
-        //We need this because from what I've read, the filePath needs to be a URI to be fully read.
-        File filePath = new File(path);
-        String URI = filePath.toURI().toString();
+        try {
+            File file = new File(filePath);
+            AudioFile audioFile = AudioFileIO.read(file);
+            Tag tag = audioFile.getTag();
+            AudioHeader header = audioFile.getAudioHeader();
 
-        Media baldhead = new Media(URI);
-        MediaPlayer necessary = new MediaPlayer(baldhead);
-        //as far as I can tell, I need a media player as well to trigger the loading of the metadata.
+            if (tag != null) {
+                metadata.put("title",       getFieldSafe(tag, FieldKey.TITLE));
+                metadata.put("artist",      getFieldSafe(tag, FieldKey.ARTIST));
+                metadata.put("album",       getFieldSafe(tag, FieldKey.ALBUM));
+                metadata.put("year",        getFieldSafe(tag, FieldKey.YEAR));
+                metadata.put("genre",       getFieldSafe(tag, FieldKey.GENRE));
+                metadata.put("trackNumber", getFieldSafe(tag, FieldKey.TRACK));
+                metadata.put("comment",     getFieldSafe(tag, FieldKey.COMMENT));
+            }
 
-        Map<String, Object> results = new HashMap<>();
+            if (header != null) {
+                metadata.put("duration",   String.valueOf(header.getTrackLength()));
+                metadata.put("bitRate",    header.getBitRate());
+                metadata.put("sampleRate", header.getSampleRate());
+                metadata.put("format",     header.getFormat());
+            }
 
-        CountDownLatch parry = new CountDownLatch(1);
-        //Apparently the metadata loads too slow, so we need to stall it until it's ready.
-        //It needs to be '1' because we are waiting for the metadata loading event to finish.
+        } catch (Exception e) {
+            System.err.println("MetaPull: Error reading metadata for: " + filePath);
+            e.printStackTrace();
+        }
 
-        necessary.setOnReady(() -> {
+        return metadata;
+    }
 
-           results.putAll(baldhead.getMetadata());
-
-           parry.countDown();
-        });
-
-        parry.await();
-        necessary.dispose();
-
-        return results;
+    private static String getFieldSafe(Tag tag, FieldKey key) {
+        try {
+            String value = tag.getFirst(key);
+            return (value != null && !value.isEmpty()) ? value : "Unknown";
+        } catch (Exception e) {
+            return "Unknown";
+        }
     }
 }
