@@ -1,15 +1,12 @@
 package org.tyla.tyla_media_player;
 
-import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.stage.Stage;
 import java.io.File;
-import java.util.List;
 
-public class AVLibraryDemo extends Application {
-    public void start(Stage stage) throws Exception {
+
+public class AVLibraryDemo {
+    public static void main(String[] args) {
         AVLibrary lib1 = new AVLibrary();
-        File file = new File("C:/Users/karlt/OneDrive/Documents/TestDirSchool");
+        File file = new File("C:/Users/Tyler/Documents/School Stuff/TYLA_MP Test Dir");
 
         lib1.addDir(file);
         System.out.println("current song list: " + lib1.getAudioPath());
@@ -32,19 +29,5 @@ public class AVLibraryDemo extends Application {
         System.out.println("videoTotal: " + lib1.getVideoTotal());
         System.out.println("current audio files: " + lib1.getAudioPath());
 
-        String keyword = "piano";
-        List<String> results = librarySearch.searchLibrary(lib1, keyword);
-
-        for(String res : results){
-
-            System.out.println(res);
-        }
-
-        Platform.exit();
-    }
-
-    public static void main(String[] args){
-
-        launch(args);
     }
 }

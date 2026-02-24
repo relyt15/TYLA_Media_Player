@@ -6,11 +6,11 @@ import java.util.HashMap;
 
 public class AVLibrary {
     private ArrayList<File> dirList;
-    private HashMap<String, HashMap<String, Object>> audioMap; // stores audio files with their respective metadata
-    private HashMap<String, HashMap<String, Object>> videoMap; // stores video files with their respective metadata
+    private HashMap<String, MetaPull> audioMap; // stores audio files with their respective metadata
+    private HashMap<String, MetaPull> videoMap; // stores video files with their respective metadata
     private int dirTotal; // used to track number of directories in the list
     private int audioTotal; // used to track number of audio files in the hashmap
-    private MetaPull metaMap; // used to hold a hashmap<string, object> that holds metadata for media items
+    //private MetaPull = metaMap; // used to hold a hashmap<string, object> that holds metadata for media items
     private int videoTotal; // used to track number of videos in the hashmap
     private String[] audioFileExtensions = {".mp3", ".wav", ".flac", ".ogg", ".opus", ".aac", ".aiff",
             ".pcm", ".wma", ".m4a",".alac", ".ape", ".au"};
@@ -18,12 +18,12 @@ public class AVLibrary {
 
     public AVLibrary(){
         dirList = new ArrayList<>();
-        audioMap = new HashMap<String, HashMap<String, Object>>();
-        videoMap = new HashMap<String, HashMap<String, Object>>();
+        audioMap = new HashMap<String, MetaPull>();
+        videoMap = new HashMap<String, MetaPull>();
         dirTotal = 0;
         audioTotal = 0;
         videoTotal = 0;
-        metaMap = new MetaPull();
+       // metaMap = new MetaPull();
 
     } // end of constructor
 
@@ -46,7 +46,7 @@ public class AVLibrary {
      * then adds all music files within to a hashmap of audio filess with their metadata as a value
      *
      */
-    public void addDir(File newDir) throws InterruptedException {
+    public void addDir(File newDir){
         if(newDir.exists() && newDir.isDirectory()){
             for(File f : dirList){
                 if(!newDir.getPath().equals(f.getPath())){ //2026-02-19 TC: need to verify .equals method verifies that the file paths are identical
@@ -75,8 +75,8 @@ public class AVLibrary {
             if(f.isDirectory() && f.exists()){
                 removeDir(f);
             }
-            removeVideo(f.getPath(), videoMap.get(f.getPath()));
-            removeAudio(f.getPath(), audioMap.get(f.getPath()));
+           // removeVideo(f.getPath(), videoMap.get(f.getPath()));
+            //removeAudio(f.getPath(), audioMap.get(f.getPath()));
         }
         if(dirList.contains(directory)) {
             dirList.remove(directory);
@@ -98,7 +98,7 @@ public class AVLibrary {
      * @precondition: dirList must not be empty
      * @postcondition: scans all audio and video files and places them in their respective audioMap or videoMap
      */
-    public void rescanDirs() throws InterruptedException {
+    public void rescanDirs(){
         for(File f : dirList){
             if(f.exists() && f.isDirectory()){
                 addAudio(f);
@@ -153,7 +153,7 @@ public class AVLibrary {
      * @precondition: directory should not be empty
      * @postcondition: adds all audio files within a directory to audioMap
      */
-    private void addAudio(File directory) throws InterruptedException {
+    private void addAudio(File directory){
         //HashMap<String,Object> metaData = new HashMap<String,Object>();
         for(File f : directory.listFiles()){    //2026-02-19 TC: need to check how to handle if the directory.listfiles() is null
             if (f.isDirectory() && f.exists()){
@@ -161,9 +161,8 @@ public class AVLibrary {
             }
             for (String fileExtension : audioFileExtensions) {
                 if (f.getName().endsWith(fileExtension)) {
-                    // metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
-                    // audioMap.put(f.getPath(), metaMap);
-                    audioMap.put(f.getPath(), MetaPull.MetadataPull(f.getPath()));
+                    //metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
+                   // audioMap.put(f.getPath(), metaMap);
                     audioTotal++;
                     break;
                 }
@@ -175,7 +174,7 @@ public class AVLibrary {
      * @precondition: directory should not be empty
      * @postcondition: adds all video files within a directory to videoMap
      */
-    private void addVideos(File directory) throws InterruptedException {
+    private void addVideos(File directory){
         //HashMap<String,Object> metaData = new HashMap<String,Object>();
         for(File f : directory.listFiles()){    //2026-02-19 TC: need to check how to handle if the directory.listfiles() is null
             if (f.isDirectory() && f.exists()){
@@ -185,7 +184,6 @@ public class AVLibrary {
                 if (f.getName().endsWith(fileExtension)) {
                     //metaMap.MetadataPull(f.getPath()); // update with whatever luc names the class and methods
                     //videoMap.put(f.getPath(), metaMap);
-                    videoMap.put(f.getPath(), MetaPull.MetadataPull(f.getPath()));
                     videoTotal++;
                     break;
                 }
@@ -209,13 +207,13 @@ public class AVLibrary {
         return videos;
     }
 
-    public HashMap<String,HashMap<String,Object>> getAudioMap() {
-        return audioMap;
-    }
-
-    public HashMap<String, HashMap<String,Object>> getVideoMap(){
-        return videoMap;
-    }
+//    public HashMap<String,HashMap<String,Object>> getAudioMap() {
+//        return audioMap;
+//    }
+//
+//    public HashMap<String, HashMap<String,Object>> getVideoMap(){
+//        return videoMap;
+//    }
 
 
 
