@@ -7,24 +7,14 @@ import java.util.List;
 
 public class librarySearch {
 
-    public static List<String> searchLibrary(HashMap<String, Map<String, Object>> library, String keyword) {
+    public static List<String> searchLibrary(AVLibrary library, String keyword) {
 
         List<String> results = new ArrayList<>();
+        int total = library.getDirTotal();
+        HashMap<String, HashMap<String, Object>> audioLib = library.getAudioMap();
+        HashMap<String, HashMap<String, Object>> videoLib = library.getVideoMap();
 
-        for (Map.Entry<String, Map<String, Object>> mediaEntry : library.entrySet()) {
 
-            String mediaID = mediaEntry.getKey();
-            Map<String, Object> mdata = mediaEntry.getValue();
-
-            for(Object value : mdata.values()){
-
-                if(value != null && value.toString().toLowerCase().contains(keyword.toLowerCase())){
-
-                    results.add(mediaID);
-                    break;
-                }
-            }
-        }
 
         return results;
     }
