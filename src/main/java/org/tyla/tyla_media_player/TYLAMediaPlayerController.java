@@ -3,6 +3,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
@@ -12,32 +13,48 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
+import uk.co.caprica.vlcj.javafx.videosurface.ImageViewVideoSurface;
+import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
+import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
+import javafx.scene.image.ImageView;
 public class TYLAMediaPlayerController implements Initializable {
     @FXML
     private MediaView mediaView;
     @FXML
     private Button btnStart, btnStop, btnReset,btnScare;
 
-    private File file;
+    /*private File file;
     private Media media;
-    private MediaPlayer mediaPlayer;
+    private MediaPlayer mediaPlayer;*/
+
+    private MediaPlayerFactory factory;
+    private EmbeddedMediaPlayer mediaPlayer;
+    private ImageView imageView;
+    private Slider progressSlider;
+    private boolean sliding = false;
+
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-        file = new File("kirby.mp4");
+        /*file = new File("kirby.mp4");
         media = new Media(file.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
-        mediaView.setMediaPlayer(mediaPlayer);
+        mediaView.setMediaPlayer(mediaPlayer);*/
+        factory     = new MediaPlayerFactory();
+        mediaPlayer = factory.mediaPlayers().newEmbeddedMediaPlayer();
+        mediaPlayer.videoSurface().set(new ImageViewVideoSurface(imageView));
+        mediaPlayer.media().prepare("kirby.mp4");
     }
 
     public void btnStartOnClick(){
-        mediaPlayer.play();
+        mediaPlayer.controls().play();
     }
     public void btnStopOnClick(){
-        mediaPlayer.pause();
+        mediaPlayer.controls().stop();
     }
     public void btnResetOnClick(){
-        mediaPlayer.seek(Duration.seconds(0));
+        mediaPlayer.controls().setTime(0);
     }
     public void btnScareOnClick() {
 
