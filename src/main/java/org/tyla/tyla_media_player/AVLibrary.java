@@ -11,7 +11,7 @@ public class AVLibrary {
     private int dirTotal; // used to track number of directories in the list
     private int audioTotal; // used to track number of audio files in the hashmap
     private int videoTotal; // used to track number of videos in the hashmap
-    private String[] audioFileExtensions = {".mp3", ".wav", ".flac", ".ogg", ".opus", ".wma", ".m4a",".m4p", ".mp4", ".dsf"};
+    private String[] audioFileExtensions = {".mp3", ".wav", ".flac", ".ogg", ".opus", ".wma", ".dsf"};
     private String[] videoFileExtensions = {".mp4", ".mov", ".mkv"};
 
     public AVLibrary(){
@@ -39,7 +39,7 @@ public class AVLibrary {
      * @param newDir
      * @precondition: newDir must be a directory
      * @postcondition: takes a new directory input, adds it to a hashmap of directories,
-     * then adds all music files within to a hashmap of audio filess with their metadata as a value
+     * then adds all music files within to a hashmap of audio files with their metadata as a value
      *
      */
     public void addDir(File newDir) throws InterruptedException {
@@ -149,7 +149,7 @@ public class AVLibrary {
             }
             for (String fileExtension : videoFileExtensions) {
                 if (f.getName().endsWith(fileExtension)) {
-                    videoMap.put(f.getPath(), MetaPull2.metadataPull(f.getPath()));
+                    videoMap.put(f.getPath(), VideoMetaPull.getMetadata(f.getPath()));
                     videoTotal++;
                     break;
                 }
