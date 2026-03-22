@@ -180,7 +180,6 @@ public class AVLibrary {
         }
     }
 
-
     public String getAudioPath(){
         String audioFiles = "";
         for (String f : audioMap.keySet()){
@@ -206,12 +205,8 @@ public class AVLibrary {
     public HashMap<String,HashMap<String,String>> getAudioMap() {
         return audioMap;
     }
-
     public HashMap<String, HashMap<String,String>> getVideoMap(){
         return videoMap;
     }
-
-
-
 
 } // end of Music Library Class
