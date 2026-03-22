@@ -8,6 +8,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.util.Duration;
+import javafx.scene.image.ImageView;
 
 import java.io.File;
 import java.net.URL;
@@ -17,10 +18,10 @@ import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.javafx.videosurface.ImageViewVideoSurface;
 import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
-import javafx.scene.image.ImageView;
+
 public class TYLAMediaPlayerController implements Initializable {
     @FXML
-    private MediaView mediaView;
+    private ImageView imageView;
     @FXML
     private Button btnStart, btnStop, btnReset,btnScare;
 
@@ -30,7 +31,6 @@ public class TYLAMediaPlayerController implements Initializable {
 
     private MediaPlayerFactory factory;
     private EmbeddedMediaPlayer mediaPlayer;
-    private ImageView imageView;
     private Slider progressSlider;
     private boolean sliding = false;
 
