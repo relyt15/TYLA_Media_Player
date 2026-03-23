@@ -32,7 +32,6 @@ public class AVLibraryDemo {
 
         MusicOrganizer organizer = new MusicOrganizer(lib1.getAudioMap());
 
-        System.out.println("\nDifferent Views\n");
         organizer.printArtistView();
         organizer.printAlbumView();
     }
