@@ -14,7 +14,6 @@ public class AVLibraryDemo {
         System.out.println("Current dirList: " + lib1.getDirList());
         System.out.println("File SongName: " + lib1.getAudioMap().get("C:\\Users\\karlt\\OneDrive\\Documents\\TestDirSchool\\piano-loops-120-bpm.wav").get("title"));
 
-
         lib1.clearDirList();
         System.out.println("cleared dirList" + lib1.getAudioPath());
 
@@ -31,5 +30,10 @@ public class AVLibraryDemo {
         System.out.println("videoTotal: " + lib1.getVideoTotal());
         System.out.println("current audio files: " + lib1.getAudioPath());
 
+        MusicOrganizer organizer = new MusicOrganizer(lib1.getAudioMap());
+
+        System.out.println("\nDifferent Views\n");
+        organizer.printArtistView();
+        organizer.printAlbumView();
     }
 }
