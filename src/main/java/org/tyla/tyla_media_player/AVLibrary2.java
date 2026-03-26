@@ -214,6 +214,16 @@ public class AVLibrary2 {
         return audioFiles;
     }
 
+    public Song getSong(String songTitle){
+        Song song = null;
+        for(Song s : audioList){
+            if(s.getTitle().equalsIgnoreCase(songTitle)){
+                song = s;
+            }
+        }
+        return song;
+    }
+
     public String getAudioTitles(){
         String audioTitles = "";
         for (Song s : audioList){
