@@ -1,35 +1,43 @@
 package org.tyla.tyla_media_player;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Playlist {
-    private HashMap<String, HashMap<String, String>> songMap;
+    //private HashMap<String, HashMap<String, String>> songMap;
+    private ArrayList<Song> songList;
     private int songTotal;
     private String name;
 
     public Playlist(String name){
         songTotal = 0;
+        songList = new ArrayList<>();
         this.name = name;
     }
 
     /**
      * @precondition: input must be from AVLibrary object
      * @postcondition: adds an audio file from the AVLibrary object, into a new collection called a Playlist.
-     * @param pathname
-     * @param infoHash
+     * @param song
      * @return
      */
-    public void addSong(String pathname, HashMap<String, String> infoHash){
-        if (!songMap.containsKey(pathname)){
-            songMap.put(pathname, infoHash);
+    public void addSong(Song song){
+        if (!songList.contains(song)){
+            songList.add(song);
             songTotal++;
         }
     }
 
-    public void removeSong(String pathname, HashMap<String, String> infoHash){
-        if(songMap.containsKey(pathname)){
-            songMap.remove(pathname, infoHash);
+    public void removeSong(Song song){
+        if(songList.contains(song)){
+            songList.remove(song);
             songTotal--;
+        }
+    }
+
+    public void clearPlaylist(){
+        while(songTotal > 0){
+            removeSong(songList.get(songTotal-1));
         }
     }
 
@@ -41,40 +49,53 @@ public class Playlist {
         return this.name;
     }
 
-    public HashMap<String, HashMap<String, String>> getSongMap(){
-        return songMap;
+    public ArrayList<Song> getSongList(){
+        return songList;
     }
 
     public String getSongNames(){
         String songNames = "";
-        for (String f : songMap.keySet()){
-            songNames += songMap.get(f).get("title") + "\n";
+        for (Song f : songList){
+            songNames += f.getTitle() + "\n";
         }
         return songNames;
     }
 
-    public String getSongArtists(){
-        String artists = "";
-        for (String f : songMap.keySet()){
-            artists += songMap.get(f).get("artist") + "\n";
+    public void changeSongOrder(Song song, int num){
+        int prevIndex = -1;
+        Song songBuffer;
+
+        if(songList.contains(song)){
+            prevIndex = songList.indexOf(song); //saves current index of input song
+            songBuffer = songList.get(num); //saves current song in index num
+            songList.add(num, song); //places input song into index num
+            if(num > songList.indexOf(song)){
+                for(int i = songList.indexOf(song) + 1; i < num; i++){
+                    songList.add(songList.indexOf(songList.get(i-1)), songList.get(i));
+                }
+                songList.add(num, songBuffer);
+            }
+            if (num < songList.indexOf(song)){
+                for(int i = songList.indexOf(song) - 1; i > num; i--){
+                    songList.add(songList.indexOf(songList.get(i+1)), songList.get(i));
+                }
+                songList.add(num, songBuffer);
+            }
         }
-        return artists;
     }
 
-    public String getSongGenres(){
-        String genres = "";
-        for (String f : songMap.keySet()){
-            genres += songMap.get(f).get("genre") + "\n";
+    /**
+     * @precondition:
+     * @postcondition: returns -1 if song is not in the playlist, else returns index of the song
+     * @param song
+     * @return
+     */
+    public int getSongOrder(Song song){
+        int index = -1;
+        if (songList.contains(song)) {
+            index = songList.indexOf(song);
         }
-        return genres;
-    }
-
-    public String getSongAlbums(){
-        String albums = "";
-        for (String f : songMap.keySet()){
-            albums += songMap.get(f).get("album") + "\n";
-        }
-        return albums;
+        return index;
     }
 
 

@@ -2,9 +2,9 @@ package org.tyla.tyla_media_player;
 
 import java.util.HashMap;
 
-public class Song {
+public class Song2 {
 
-    private String path = "";
+    public final String path;
 
     public final String title;
     public final String artist;
@@ -19,7 +19,7 @@ public class Song {
     public final String sampleRate;
     public final String format;
 
-    public Song(String path, HashMap<String, String> meta) {
+    public Song2(String path, HashMap<String, String> meta) {
         this.path = path;
 
         this.title = normalize(meta.get("title"), "Unknown Title");
@@ -62,24 +62,8 @@ public class Song {
         }
     }
 
-    public String getPath(){
-        return this.path;
+    @Override
+    public String toString() {
+        return artist + " - " + title + " (" + album + ")";
     }
-
-    public String getTitle(){
-        return this.title;
-    }
-
-    public String getArtist(){
-        return this.artist;
-    }
-
-    public String getAlbum(){
-        return this.album;
-    }
-
-//    @Override
-//    public String toString() {
-//        return artist + " - " + title + " (" + album + ")";
-//    }
 }
