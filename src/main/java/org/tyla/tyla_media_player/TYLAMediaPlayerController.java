@@ -2,20 +2,12 @@ package org.tyla.tyla_media_player;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import javafx.scene.media.MediaView;
-import javafx.util.Duration;
 import javafx.scene.image.ImageView;
-
-import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.function.UnaryOperator;
-
 import uk.co.caprica.vlcj.factory.MediaPlayerFactory;
 import uk.co.caprica.vlcj.javafx.videosurface.ImageViewVideoSurface;
-import uk.co.caprica.vlcj.player.base.MediaPlayerEventAdapter;
 import uk.co.caprica.vlcj.player.embedded.EmbeddedMediaPlayer;
 
 public class TYLAMediaPlayerController implements Initializable {
@@ -23,6 +15,9 @@ public class TYLAMediaPlayerController implements Initializable {
     private ImageView imageView;
     @FXML
     private Button btnStart, btnStop, btnReset,btnScare, btnIncrementForward, btnIncrementBackwards;
+
+    @FXML
+    private Slider scrlMediaPlayerSlider;
 
     @FXML
     private TextField txtIncrementValue;
@@ -73,6 +68,7 @@ public class TYLAMediaPlayerController implements Initializable {
     }
     public void btnResetOnClick(){
         mediaPlayer.controls().setTime(0);
+        mediaPlayer.controls().nextFrame();
     }
 
     public void btnIncrementForwardOnClick(){

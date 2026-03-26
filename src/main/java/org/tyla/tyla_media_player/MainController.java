@@ -4,9 +4,15 @@ import javafx.animation.KeyValue;
 import javafx.fxml.FXML;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class MainController {
 
@@ -14,7 +20,10 @@ public class MainController {
     private VBox sidebar;
 
     @FXML
-    private Button menuButton;
+    private StackPane mediaPane;
+
+    @FXML
+    private Button menuButton, homeButton, settingButton, libraryButton;
 
     @FXML
     public void initialize() {
@@ -44,5 +53,24 @@ public class MainController {
         menuButton.setTextFill(isOpen
                 ? javafx.scene.paint.Color.web("FFFFFF")
                 : javafx.scene.paint.Color.web("424549"));
+    }
+
+    @FXML
+    private void toggleSettings() throws IOException {
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("../fxml/tylaMediaViewerFXML.fxml"));
+        //Parent view = loader.load();
+        //mediaPane.getChildren().add(view);
+        loadView("../fxml/tylaMediaViewerFXML.fxml");
+    }
+
+    private void loadView(String fxmlPath) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent view = loader.load();
+            mediaPane.getChildren().clear();
+            mediaPane.getChildren().add(view);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
