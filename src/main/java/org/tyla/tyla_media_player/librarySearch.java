@@ -18,7 +18,10 @@ public class librarySearch {
 
                 if (e.getValue().toLowerCase().contains((keyword.toLowerCase()))){
 
-                    results.add(s);
+                    if(!results.contains(s)){
+
+                        results.add(s);
+                    }
                 }
             }
         }

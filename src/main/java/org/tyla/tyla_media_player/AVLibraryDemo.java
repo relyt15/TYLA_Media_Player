@@ -6,7 +6,7 @@ import java.io.File;
 public class AVLibraryDemo {
     public static void main(String[] args) throws InterruptedException {
         AVLibrary2 lib1 = new AVLibrary2();
-        File file = new File("C:\\Users\\Tyler\\Documents\\School Stuff\\TYLA_MP Test Dir");
+        File file = new File("C:\\Users\\karlt\\OneDrive\\Documents\\TestDirSchool");
         Playlist plst = new Playlist("Fav Tunes");
 
         lib1.addDir(file);
@@ -25,27 +25,31 @@ public class AVLibraryDemo {
         plst.clearPlaylist();
         System.out.println(plst.getSongList());
 
-//        System.out.println("File SongName: " + lib1.getAudioList());
-//
-//        System.out.println(lib1.getDirTotal());
-//        lib1.clearDirList();
-//        System.out.println("cleared dirList" + lib1.getAudioPaths());
-//        System.out.println(lib1.getDirTotal());
-//
-//        lib1.removeDir(file);
-//        System.out.println("removed directory" + lib1.getAudioPaths());
-//
-//        System.out.println("audioTotal: " + lib1.getAudioTotal());
-//        System.out.println("videoTotal: " + lib1.getVideoTotal());
-//        System.out.println("current audio files: " + lib1.getAudioPaths());
-//
-//        lib1.addDir(file);
-//
-//        System.out.println("audioTotal: " + lib1.getAudioTotal());
-//        System.out.println("videoTotal: " + lib1.getVideoTotal());
-//        System.out.println("current audio files: " + lib1.getAudioPaths());
-//        System.out.println("current video files: " + lib1.getVideoPath());
+        System.out.println("File SongName: " + lib1.getAudioList());
 
+        System.out.println(lib1.getDirTotal());
+        lib1.clearDirList();
+        System.out.println("cleared dirList" + lib1.getAudioPaths());
+        System.out.println(lib1.getDirTotal());
 
+        lib1.removeDir(file);
+        System.out.println("removed directory" + lib1.getAudioPaths());
+
+        System.out.println("audioTotal: " + lib1.getAudioTotal());
+        System.out.println("videoTotal: " + lib1.getVideoTotal());
+        System.out.println("current audio files: " + lib1.getAudioPaths());
+
+        lib1.addDir(file);
+
+        System.out.println("audioTotal: " + lib1.getAudioTotal());
+        System.out.println("videoTotal: " + lib1.getVideoTotal());
+        System.out.println("current audio files: " + lib1.getAudioPaths());
+        System.out.println("current video files: " + lib1.getVideoPath());
+
+        System.out.println("Getting Results From Search;");
+        for(Song s : librarySearch.searchLibrary(lib1.getAudioList(), "Piano")){
+
+            System.out.println(s);
+        }
     }
 }
