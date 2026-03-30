@@ -52,6 +52,9 @@ public class Playlist {
     public ArrayList<Song> getSongList(){
         return songList;
     }
+    public int getSongTotal(){
+        return songTotal;
+    }
 
     public String getSongNames(){
         String songNames = "";
@@ -68,7 +71,7 @@ public class Playlist {
         if(songList.contains(song)){
             prevIndex = songList.indexOf(song); //saves current index of input song
             songBuffer = songList.get(num); //saves current song in index num
-            songList.add(num, song); //places input song into index num
+            //songList.add(num, song); //places input song into index num
             if(num > songList.indexOf(song)){
                 for(int i = songList.indexOf(song) + 1; i < num; i++){
                     songList.add(songList.indexOf(songList.get(i-1)), songList.get(i));
