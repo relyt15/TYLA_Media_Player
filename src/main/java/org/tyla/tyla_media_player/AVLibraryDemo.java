@@ -6,7 +6,7 @@ import java.io.File;
 public class AVLibraryDemo {
     public static void main(String[] args) throws InterruptedException {
         AVLibrary2 lib1 = new AVLibrary2();
-        File file = new File("C:\\Users\\Tyler\\Documents\\School Stuff\\TYLA_MP Test Dir");
+        File file = new File("C:\\Users\\karlt\\OneDrive\\Documents\\TestDirSchool");
         Playlist plst = new Playlist("Fav Tunes");
 
         lib1.addDir(file);
