@@ -68,7 +68,7 @@ public class Playlist {
         int prevIndex = -1;
         Song songBuffer;
 
-        if(songList.contains(song)){
+        if(songList.contains(song) && songList.size() <= num){
             prevIndex = songList.indexOf(song); //saves current index of input song
             songBuffer = songList.get(num); //saves current song in index num
             //songList.add(num, song); //places input song into index num
