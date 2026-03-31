@@ -20,7 +20,7 @@ class PlaylistTest {
     @BeforeEach
     void setUp() throws InterruptedException {
         lib = new AVLibrary2();
-        file = new File("C:\\Users\\Tyler\\Documents\\School Stuff\\TYLA_MP Test Dir");
+        file = new File("C:\\Users\\every\\Downloads\\TYLA_MP Test Dir");
         lib.addDir(file);
         song = lib.getSong("Clap w verb");
         song2 = lib.getSong("Oof");
@@ -100,7 +100,7 @@ class PlaylistTest {
         play.addSong(song);
         play.addSong(song2);
         play.changeSongOrder(song, 1);
-        assertEquals(0, play.getSongOrder(song));
+        assertEquals(1, play.getSongOrder(song));
     }
 
     @Test

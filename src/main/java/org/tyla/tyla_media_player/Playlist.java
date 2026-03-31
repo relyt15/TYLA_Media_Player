@@ -68,21 +68,21 @@ public class Playlist {
         int prevIndex = -1;
         Song songBuffer;
 
-        if(songList.contains(song) && songList.size() <= num){
+        if(songList.contains(song) && songList.size() >= num){
             prevIndex = songList.indexOf(song); //saves current index of input song
-            songBuffer = songList.get(num); //saves current song in index num
+            songBuffer = songList.get(prevIndex); //saves current song in index num
             //songList.add(num, song); //places input song into index num
             if(num > songList.indexOf(song)){
-                for(int i = songList.indexOf(song) + 1; i < num; i++){
-                    songList.add(songList.indexOf(songList.get(i-1)), songList.get(i));
+                for(int i = songList.indexOf(song) + 1; i <= num; i++){
+                    songList.set(songList.indexOf(songList.get(i-1)), songList.get(i));
                 }
-                songList.add(num, songBuffer);
+                songList.set(num, songBuffer);
             }
             if (num < songList.indexOf(song)){
-                for(int i = songList.indexOf(song) - 1; i > num; i--){
+                for(int i = songList.indexOf(song) - 1; i >= num; i--){
                     songList.add(songList.indexOf(songList.get(i+1)), songList.get(i));
                 }
-                songList.add(num, songBuffer);
+                songList.set(num, songBuffer);
             }
         }
     }
