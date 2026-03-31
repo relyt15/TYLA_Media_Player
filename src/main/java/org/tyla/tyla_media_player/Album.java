@@ -19,5 +19,19 @@ public class Album {
         return this.name;
     }
 
+    public Song getSong(Song sung){
 
+        Song test = null;
+
+        for(Song s: songs){
+
+            if(s.getTitle().equals(sung.getTitle())){
+
+                test = s;
+                return test;
+            }
+        }
+
+        return test;
+    }
 }

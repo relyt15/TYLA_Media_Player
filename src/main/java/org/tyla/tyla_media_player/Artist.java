@@ -13,6 +13,7 @@ public class Artist {
 
     public void createAlbum(String title, Song song){
         Album newAlbum = new Album(title, song);
+        albums.add(newAlbum);
     }
 
     public boolean containsAlbum(String album){
@@ -33,4 +34,28 @@ public class Artist {
         }
     }
 
+    public int getAlbumsSize(){
+
+        return albums.size();
+    }
+
+
+    public Album getAlbum(String albumNam){
+
+        Album album = null;
+
+        if(this.containsAlbum(albumNam)){
+
+            for(Album f: albums){
+
+                if(f.getAlbumName().equals(albumNam)){
+
+                    album = f;
+                }
+            }
+
+        }
+
+        return album;
+    }
 }
