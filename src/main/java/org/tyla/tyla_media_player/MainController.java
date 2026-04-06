@@ -26,6 +26,9 @@ public class MainController {
     @FXML
     private Button menuButton, homeButton, settingButton, libraryButton;
 
+
+    private TYLAMediaPlayerController tylaMediaPlayerController;
+
     @FXML
     public void initialize() {
         sidebar.setPrefWidth(100);
@@ -58,18 +61,18 @@ public class MainController {
 
     @FXML
     private void toggleSettings() throws IOException {
+        //how to load any fxml file per button on the ui
+        mediaPane.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tyla/tyla_media_player/tylaMediaViewerFXML.fxml"));
+        Parent root = loader.load();
+        tylaMediaPlayerController = loader.getController(); // grab it here
+        mediaPane.getChildren().setAll(root);
+    }
 
-        //to check if it exist
-        URL url = getClass().getResource("/org/tyla/tyla_media_player/tylaMediaViewerFXML.fxml");
-        System.out.println(url);
-
-        //this should work, i got an error where the fxml file was looking for a method with javafx25 and we have javafx 21 on this. in this case onDragDropped is a part of 25 and not a part of 21
-        //so i removed the onDragDropped action and it work.
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/org/tyla/tyla_media_player/tylaMediaViewerFXML.fxml"));
-            mediaPane.getChildren().setAll(root); // replaces everything inside
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void shutdown() {
+        // call shutdown on your sub-controller
+        if (tylaMediaPlayerController != null) {
+            tylaMediaPlayerController.shutdown();
         }
     }
 
