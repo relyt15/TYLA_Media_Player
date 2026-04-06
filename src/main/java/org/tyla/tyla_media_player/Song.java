@@ -78,8 +78,26 @@ public class Song {
         return this.album;
     }
 
-//    @Override
-//    public String toString() {
-//        return artist + " - " + title + " (" + album + ")";
-//    }
+    public HashMap metaMap(){
+
+        HashMap<String, String> Hashbrown = new HashMap<>();
+
+        Hashbrown.put("title", title);
+        Hashbrown.put("artist", artist);
+        Hashbrown.put("album", album);
+        Hashbrown.put("genre", genre);
+        Hashbrown.put("year", year);
+        Hashbrown.put("bitRate", bitRate);
+        Hashbrown.put("sampleRate", sampleRate);
+        Hashbrown.put("format", format);
+        Hashbrown.put("trackNumber", String.valueOf(trackNumber));
+        Hashbrown.put("duration", String.valueOf(duration));
+
+        return Hashbrown;
+    }
+
+    @Override
+    public String toString() {
+        return artist + " - " + title + " (" + album + ")";
+    }
 }

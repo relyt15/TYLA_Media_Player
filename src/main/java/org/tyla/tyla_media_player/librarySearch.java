@@ -2,26 +2,26 @@ package org.tyla.tyla_media_player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
 public class librarySearch {
 
-    public static List<String> searchLibrary(HashMap<String, Map<String, Object>> library, String keyword) {
+    public static List<Song> searchLibrary(ArrayList<Song> list, String keyword) {
 
-        List<String> results = new ArrayList<>();
+        List<Song> results = new ArrayList<>();
 
-        for (Map.Entry<String, Map<String, Object>> mediaEntry : library.entrySet()) {
+        for (Song s : list) {
 
-            String mediaID = mediaEntry.getKey();
-            Map<String, Object> mdata = mediaEntry.getValue();
+            HashMap<String, String> mappies = s.metaMap();
+            for(Map.Entry<String, String> e : mappies.entrySet()){
 
-            for(Object value : mdata.values()){
+                if (e.getValue().toLowerCase().contains((keyword.toLowerCase()))){
 
-                if(value != null && value.toString().toLowerCase().contains(keyword.toLowerCase())){
+                    if(!results.contains(s)){
 
-                    results.add(mediaID);
-                    break;
+                        results.add(s);
+                    }
                 }
             }
         }
