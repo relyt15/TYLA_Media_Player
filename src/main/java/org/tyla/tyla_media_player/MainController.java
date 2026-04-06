@@ -4,9 +4,16 @@ import javafx.animation.KeyValue;
 import javafx.fxml.FXML;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
+
+import java.io.IOException;
+import java.net.URL;
 
 public class MainController {
 
@@ -14,7 +21,13 @@ public class MainController {
     private VBox sidebar;
 
     @FXML
-    private Button menuButton;
+    private StackPane mediaPane;
+
+    @FXML
+    private Button menuButton, homeButton, settingButton, libraryButton;
+
+
+    private TYLAMediaPlayerController tylaMediaPlayerController;
 
     @FXML
     public void initialize() {
@@ -45,4 +58,23 @@ public class MainController {
                 ? javafx.scene.paint.Color.web("FFFFFF")
                 : javafx.scene.paint.Color.web("424549"));
     }
+
+    @FXML
+    private void toggleSettings() throws IOException {
+        //how to load any fxml file per button on the ui
+        mediaPane.getChildren().clear();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tyla/tyla_media_player/tylaMediaViewerFXML.fxml"));
+        Parent root = loader.load();
+        tylaMediaPlayerController = loader.getController(); // grab it here
+        mediaPane.getChildren().setAll(root);
+    }
+
+    public void shutdown() {
+        // call shutdown on your sub-controller
+        if (tylaMediaPlayerController != null) {
+            tylaMediaPlayerController.shutdown();
+        }
+    }
+
+
 }

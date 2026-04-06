@@ -1,0 +1,22 @@
+.slider .track {
+    -fx-background-color: #3a3a3a;
+}
+
+.slider > .axis {
+    visibility: hidden;
+}
+
+/* This is the filled portion */
+.slider:focused .track,
+.slider .track {
+    -fx-background-color: linear-gradient(
+        to right,
+        #00aaff var(--progress),
+        #3a3a3a var(--progress)
+    );
+}
+
+.slider .thumb {
+    -fx-background-color: #00aaff;
+    -fx-background-radius: 1em;
+}
