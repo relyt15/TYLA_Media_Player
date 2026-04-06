@@ -62,10 +62,15 @@ public class MainController {
     @FXML
     private void toggleSettings() throws IOException {
         //how to load any fxml file per button on the ui
+        // call shutdown on your sub-controller
+        if (tylaMediaPlayerController != null) {
+            tylaMediaPlayerController.shutdown();
+        }
+
         mediaPane.getChildren().clear();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/org/tyla/tyla_media_player/tylaMediaViewerFXML.fxml"));
         Parent root = loader.load();
-        tylaMediaPlayerController = loader.getController(); // grab it here
+        tylaMediaPlayerController = loader.getController();
         mediaPane.getChildren().setAll(root);
     }
 
