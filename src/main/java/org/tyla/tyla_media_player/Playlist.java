@@ -14,6 +14,25 @@ public class Playlist {
         songList = new ArrayList<>();
         this.name = name;
     }
+    // adds playlist storage
+
+    private ArrayList<Playlist> playlists = new ArrayList<>();
+
+    public void createPlaylist(String name) {
+        playlists.add(new Playlist(name));
+    }
+
+    public void removePlaylist(Playlist p) {
+        playlists.remove(p);
+    }
+
+    public ArrayList<Playlist> getPlaylists() { return playlists; }
+
+    public Playlist getPlaylist(String name) {
+        for (Playlist p : playlists)
+            if (p.getName().equalsIgnoreCase(name)) return p;
+        return null;
+    }
 
     /**
      * @precondition: input must be from AVLibrary object
