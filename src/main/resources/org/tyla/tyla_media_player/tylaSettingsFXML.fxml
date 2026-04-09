@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.tyla.tyla_media_player.SettingsController"
+      styleClass="settings-root"
+      spacing="0">
+
+    <!-- HEADER -->
+    <HBox styleClass="library-header" alignment="CENTER_LEFT" spacing="10">
+        <padding><Insets top="8" right="12" bottom="8" left="12"/></padding>
+        <Label text="⚙ SETTINGS" styleClass="library-title"/>
+    </HBox>
+
+    <!-- CONTENT -->
+    <VBox spacing="0" VBox.vgrow="ALWAYS">
+        <padding><Insets top="20" right="30" bottom="20" left="30"/></padding>
+
+        <!-- SECTION: Appearance -->
+        <Label text="APPEARANCE" styleClass="settings-section-label"/>
+        <Separator styleClass="settings-sep"/>
+
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="settings-row">
+            <padding><Insets top="12" bottom="12"/></padding>
+            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                <Label text="Theme" styleClass="settings-item-title"/>
+                <Label text="Switch between Light and Dark mode" styleClass="settings-item-desc"/>
+            </VBox>
+            <HBox styleClass="theme-toggle-group" spacing="0">
+                <ToggleButton fx:id="btnDark"
+                              text="Light"
+                              styleClass="theme-toggle, theme-toggle-selected"
+                              onAction="#setLightMode"/>
+                <ToggleButton fx:id="btnLight"
+                              text="Dark"
+                              styleClass="theme-toggle"
+                              onAction="#setDarkMode"/>
+            </HBox>
+        </HBox>
+
+        <Separator styleClass="settings-sep"/>
+
+        <!-- SECTION: About -->
+        <Label text="ABOUT" styleClass="settings-section-label">
+            <VBox.margin><Insets top="24"/></VBox.margin>
+        </Label>
+        <Separator styleClass="settings-sep"/>
+
+        <HBox alignment="CENTER_LEFT" spacing="16" styleClass="settings-row">
+            <padding><Insets top="12" bottom="12"/></padding>
+            <VBox spacing="3" HBox.hgrow="ALWAYS">
+                <Label text="TYLA Media Player" styleClass="settings-item-title"/>
+            </VBox>
+        </HBox>
+
+        <Separator styleClass="settings-sep"/>
+
+    </VBox>
+
+</VBox>

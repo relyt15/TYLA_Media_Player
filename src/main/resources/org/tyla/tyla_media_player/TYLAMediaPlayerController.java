@@ -13,7 +13,6 @@ import javafx.application.Platform;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
-import javafx.scene.layout.StackPane;
 
 public class TYLAMediaPlayerController implements Initializable {
 
@@ -34,13 +33,6 @@ public class TYLAMediaPlayerController implements Initializable {
             if (change.getControlNewText().matches("\\d*")) return change;
             return null;
         };
-        imageView.sceneProperty().addListener((obs, oldScene, newScene) -> {
-            if (newScene != null) {
-                StackPane parent = (StackPane) imageView.getParent();
-                imageView.fitWidthProperty().bind(parent.widthProperty());
-                imageView.fitHeightProperty().bind(parent.heightProperty());
-            }
-        });
         txtIncrementValue.setTextFormatter(new TextFormatter<>(filter));
 
         txtIncrementValue.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
@@ -55,8 +47,6 @@ public class TYLAMediaPlayerController implements Initializable {
         factory = new MediaPlayerFactory();
         mediaPlayer = factory.mediaPlayers().newEmbeddedMediaPlayer();
         mediaPlayer.videoSurface().set(new ImageViewVideoSurface(imageView));
-
-        // removed hardcoded tcp.mp4 — loadVideo() handles this now
 
         scrlMediaPlayerSlider.setMin(0);
         scrlMediaPlayerSlider.setMax(100);

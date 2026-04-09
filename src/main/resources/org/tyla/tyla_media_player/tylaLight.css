@@ -1,0 +1,107 @@
+/* media player light mode / key
+this is loaded on top of the dark mode
+ bg-darkest   #f0ede8   app background / base
+ bg-dark      #e4e0da   main surfaces
+ bg-mid       #ddd9d3   panels / headers
+ bg-raised    #ccc8c2   buttons / raised elements
+ bg-edge      #aaa8a0   borders / bevel shadows
+
+ tylas-y      #d98b19  tylers
+
+ text-bright  #333333   primary text
+ text-mid     #666666   secondary text
+ text-dim     #999999   tertiary / labels
+*/
+
+.root-pane           { -fx-background-color: #f0ede8; }
+.main-border         { -fx-background-color: #f0ede8; }
+
+/* Title bar */
+.title-bar           { -fx-background-color: linear-gradient(to bottom, #ddd9d3, #ccc8c2);
+                       -fx-border-color: #d98b19; }
+.title-bar-label     { -fx-text-fill: #d98b19; }
+.title-bar-btn       { -fx-background-color: #ccc8c2; -fx-text-fill: #d98b19;
+                       -fx-border-color: #aaa8a0 #888680 #888680 #aaa8a0; }
+.title-bar-btn:hover { -fx-background-color: #bbb8b0; -fx-text-fill: #3d35a0; }
+
+/* sidebar */
+.sidebar             { -fx-background-color: #e4e0da; -fx-border-color: #d98b19; }
+.sidebar-section-label { -fx-text-fill: #aaa; }
+.sidebar-btn         { -fx-text-fill: #888; }
+.sidebar-btn:hover   { -fx-background-color: #d8d4ce; -fx-text-fill: #d98b19;
+                       -fx-border-color: #d98b19; }
+
+/* content */
+.content-pane        { -fx-background-color: #f0ede8; }
+
+/* status */
+.status-bar          { -fx-background-color: #ddd9d3; -fx-border-color: #d98b19; }
+.status-label        { -fx-text-fill: #d98b19; }
+
+/* home */
+.home-view           { -fx-background-color: #f0ede8; }
+.home-logo           { -fx-text-fill: #d98b19; -fx-effect: dropshadow(gaussian, #d98b19, 14, 0.3, 0, 0); }
+.home-subtitle       { -fx-text-fill: #999; }
+.home-version        { -fx-text-fill: #bbb; }
+.eq-bar              { -fx-fill: #d98b19; }
+.home-btn-primary    { -fx-background-color: #d98b19; -fx-text-fill: #ffffff;
+                       -fx-border-color: #d98b19 #3d35a0 #3d35a0 #d98b19; }
+.home-btn-primary:hover { -fx-background-color: #6a5fdf; }
+.home-btn-secondary  { -fx-background-color: #e4e0da; -fx-text-fill: #d98b19;
+                       -fx-border-color: #bbb #999 #999 #bbb; }
+
+/* player */
+.player-root         { -fx-background-color: #f0ede8; }
+.video-panel         { -fx-background-color: #1a1a1a; } /* keep dark for video */
+.seek-panel          { -fx-background-color: #e4e0da; -fx-border-color: #ccc; }
+.time-label          { -fx-text-fill: #d98b19; }
+.seek-slider .track  { -fx-background-color: linear-gradient(to right, #d98b19 0%, #ccc 0%); }
+.seek-slider .thumb  { -fx-background-color: #d98b19; -fx-effect: dropshadow(gaussian, #d98b19, 6, 0.4, 0, 0); }
+.transport-bar       { -fx-background-color: linear-gradient(to bottom, #ddd9d3, #d4d0ca); -fx-border-color: #ccc; }
+.transport-btn       { -fx-background-color: #ccc8c2; -fx-text-fill: #444;
+                       -fx-border-color: #e0ddd8 #999 #999 #e0ddd8; }
+.transport-btn:hover { -fx-background-color: #d4d0ca; -fx-text-fill: #d98b19; }
+.transport-btn-play  { -fx-background-color: #ebe8ff; -fx-text-fill: #d98b19;
+                       -fx-border-color: #d98b19 #3d35a0 #3d35a0 #d98b19; }
+.skip-label          { -fx-text-fill: #aaa; }
+.skip-field          { -fx-background-color: #fff; -fx-text-fill: #d98b19;
+                       -fx-border-color: #ccc #aaa #aaa #ccc; }
+
+/* library */
+.library-root        { -fx-background-color: #f0ede8; }
+.library-header      { -fx-background-color: linear-gradient(to bottom, #ddd9d3, #d4d0ca);
+                       -fx-border-color: #d98b19; }
+.library-title       { -fx-text-fill: #d98b19; }
+.library-toolbar     { -fx-background-color: #e4e0da; -fx-border-color: #ccc; }
+.search-field        { -fx-background-color: #fff; -fx-text-fill: #333;
+                       -fx-prompt-text-fill: #bbb; -fx-border-color: #ccc #aaa #aaa #ccc; }
+.lib-btn             { -fx-background-color: #ccc8c2; -fx-text-fill: #666;
+                       -fx-border-color: #e0ddd8 #999 #999 #e0ddd8; }
+.lib-btn:hover       { -fx-text-fill: #d98b19; }
+.library-col-header  { -fx-background-color: #ddd9d3; -fx-border-color: #ccc; }
+.col-hdr             { -fx-text-fill: #aaa; }
+.song-list           { -fx-background-color: #f0ede8; }
+.song-list .list-cell           { -fx-text-fill: #666; -fx-border-color: #e0ddd8; }
+.song-list .list-cell:odd       { -fx-background-color: #eae7e2; }
+.song-list .list-cell:hover     { -fx-background-color: #ddd9d3; -fx-text-fill: #333; }
+.song-list .list-cell:selected  { -fx-background-color: #ebe8ff; -fx-text-fill: #d98b19; }
+.dir-panel           { -fx-background-color: #e4e0da; -fx-border-color: #d98b19; }
+.dir-panel-title     { -fx-text-fill: #aaa; }
+.dir-list            { -fx-background-color: #fff; -fx-border-color: #ccc; }
+.dir-list .list-cell          { -fx-text-fill: #aaa; }
+.dir-list .list-cell:hover    { -fx-background-color: #f5f3f0; -fx-text-fill: #666; }
+.dir-list .list-cell:selected { -fx-background-color: #ebe8ff; -fx-text-fill: #d98b19; }
+
+/* settings */
+.settings-root          { -fx-background-color: #f0ede8; }
+.settings-section-label { -fx-text-fill: #d98b19; }
+.settings-item-title    { -fx-text-fill: #333; }
+.settings-item-desc     { -fx-text-fill: #999; }
+.settings-sep           { -fx-background-color: #ddd; }
+.settings-row:hover     { -fx-background-color: #eae7e2; }
+.theme-toggle           { -fx-background-color: #ccc8c2; -fx-text-fill: #666;
+                          -fx-border-color: #aaa; }
+.theme-toggle-selected  { -fx-background-color: #d98b19; -fx-text-fill: #fff; }
+.settings-toggle        { -fx-background-color: #ccc8c2; -fx-text-fill: #666;
+                          -fx-border-color: #aaa; }
+.settings-toggle:selected { -fx-background-color: #d98b19; -fx-text-fill: #fff; }
