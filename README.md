@@ -1,6 +1,6 @@
+<img width="1270" height="795" alt="Screenshot from 2026-09-30 16-33-34" src="https://github.com/user-attachments/assets/41194701-ab67-4c0b-b8b6-03d0efdd7e42" />
 Media Player Application
 
-<img width="1270" height="795" alt="Screenshot from 2026-09-30 16-32-58" src="https://github.com/user-attachments/assets/8ccb680a-66b4-42fd-a6f8-57c812128312" />
 
 # What is TYLA Media Player
 - TYLA media player is a multimedia player application built using Java in order to learn more about how media players work and how they could be improved.
@@ -24,3 +24,7 @@ Potential updates for the media player include:
 - customizable scrubbing features
 - metadata editing from the media player
 - and more...
+
+<img width="1270" height="795" alt="Screenshot from 2026-09-30 16-33-48" src="https://github.com/user-attachments/assets/d4bb4ba2-e377-4daa-8d9f-5392e32a53f8" />
+
+<img width="1270" height="795" alt="Screenshot from 2026-09-30 16-32-58" src="https://github.com/user-attachments/assets/8ccb680a-66b4-42fd-a6f8-57c812128312" />
